@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/model/model_quiz.dart';
+import 'package:quiz_app/screen/screen_quiz.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,6 +14,25 @@ class _HomeScreenState extends State<HomeScreen> {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width;
     double height = screenSize.height;
+
+    //버튼을 눌렀을 때 데이터를 가져오게 하기 위해서 데이터를 만듬
+    List<Quiz> quizs = [
+      Quiz.fromMap({
+        'title': 'test',
+        'candidates': ['a', 'b', 'c', 'd'],
+        'answer': 0
+      }),
+      Quiz.fromMap({
+        'title': 'test',
+        'candidates': ['a', 'b', 'c', 'd'],
+        'answer': 0
+      }),
+      Quiz.fromMap({
+        'title': 'test',
+        'candidates': ['a', 'b', 'c', 'd'],
+        'answer': 0
+      }),
+    ];
 
     // SafeArea로 기기의 상단 노티부분과 하단 영역을 침범하지 않게 영역을 잡아줌
     return SafeArea(
@@ -49,22 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildStep(width, '2. 문제를 잘 읽고 정답을 고른 뒤\n다음 문제 버튼을 눌러주세요.'),
             _buildStep(width, '3. 만점을 향해 도전해보세요!'),
             Padding(padding: EdgeInsets.all(width * 0.048)),
-            // Container(
-            //   padding: EdgeInsets.only(bottom: width * 0.036),
-            //   child: Center(
-            //     child: ButtonTheme(
-            //       minWidth: width * 0.8,
-            //       height: height * 0.05,
-            //       shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(10.0)),
-            //       child: RaisedButton(
-            //         child:
-            //             Text('지금 퀴즈 풀기', style: TextStyle(color: Colors.white)),
-            //         onPressed: () {},
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Container(
               padding: EdgeInsets.only(bottom: width * 0.036),
               child: Center(
@@ -79,7 +84,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child:
                         Text('지금 퀴즈 풀기', style: TextStyle(color: Colors.white)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QuizScreen(
+                            quizs: quizs,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
