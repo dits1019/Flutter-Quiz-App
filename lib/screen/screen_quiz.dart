@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:quiz_app/model/model_quiz.dart';
+import 'package:quiz_app/screen/screen_result.dart';
 import 'package:quiz_app/widget/widget_candidates.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -105,6 +106,14 @@ class _QuizScreenState extends State<QuizScreen> {
                     : () {
                         // 마지막 문제일 때
                         if (_currentIndex == widget.quizs.length - 1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResultScreen(
+                                      answers: _answers,
+                                      quizs: widget.quizs,
+                                    )),
+                          );
                         }
                         // 마지막 문제가 아닐 때
                         else {
